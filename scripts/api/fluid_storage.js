@@ -1,10 +1,10 @@
-import { world } from "@minecraft/server";
-import { asWorldProperty } from "../util/world_to_block";
+import { DynamicObject } from "nathan-lib";
 export class FluidStorage {
     onPlace(e) {
-        world.setDynamicProperty(asWorldProperty("fluid_amount", e.block), 0);
+        // Set the fluid amount to 0 when the block is placed
+        this.fluidAmount = new DynamicObject(e.block, "fluid_amount", 0);
     }
     onPlayerDestroy(e) {
-        world.setDynamicProperty(asWorldProperty("fluid_amount", e.block), 0);
+        this.fluidAmount.setVal(0);
     }
 }
